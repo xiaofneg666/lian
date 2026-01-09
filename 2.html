@@ -1,37 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Git 常用命令手册</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 1000px; margin: 0 auto; padding: 20px; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 40px; }
+        h2 { color: #2980b9; font-size: 1.2em; }
+        code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d63384; font-weight: bold; }
+        .cmd-block { background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 6px; margin: 10px 0; overflow-x: auto; }
+        .cmd-block code { background: none; color: #98c379; padding: 0; }
+        .comment { color: #5c6370; font-style: italic; }
+        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+        .tip { background: #e7f3fe; border-left: 5px solid #2196F3; padding: 10px; margin: 10px 0; }
+    </style>
 </head>
 <body>
+
     <h1>第一步：准备环境（只需做一次）</h1>
-    <p>本地项目：</p>
-    <h2>在终端</h2>
-    <p>git remote add origin https://github.com/xiaofneg666/lian.git </url></p>
-    <p>git init</p><br>
+    <p>本地项目初始化与远程关联：</p>
+    <div class="cmd-block">
+        <span class="comment">// 1. 初始化本地仓库</span><br>
+        <code>git init</code><br><br>
+        <span class="comment">// 2. 关联远程 GitHub 仓库</span><br>
+        <code>git remote add origin https://github.com/xiaofneg666/lian.git</code><br><br>
+        <span class="comment">// 3. 克隆远程代码（如果是从零开始开发他人项目）</span><br>
+        <code>git clone &lt;url&gt;</code>
+    </div>
+
     <h1>第二步：日常开发（不断循环）</h1>
-    <p>1. 把所有改动放进暂存区（别忘了那个点！）</p>
-    <p>git add .  这个位置要注意空格和 . </p><hr>
-    <p>2. 正式存入本地仓库（写好备注）</p>
-    <p>git commit -m "这次我写了什么功能"</p><hr>
-    <p># 3. 把本地进度同步到 GitHub</p>
-    <p>git push origin master</p> <hr>
-    <h1>怎么回滚</h1>
-    <p>可以先看看之前的历史纪录<br>git log --oneline</p>
-    <p>eg:<object data="/1.txt.txt" width="400" height="300"></object></p><hr>
-    <p>$ git remote -v  #查看远程版本库信息</p>
-    <p>$ git remote show <remote>   #查看指定远程版本库信息</p><hr>
+    
+    <h2>1. 状态查看与对比</h2>
+    <div class="cmd-block">
+        <span class="comment">// 当前分支状态（改动总览）</span><br>
+        <code>git status</code><br><br>
+        <span class="comment">// 查看具体的代码修改细节</span><br>
+        <code>git diff</code>
+    </div>
 
-        <p>git branch  #显示所有本地分支</p>
-        <p>$ git branch dev     #创建新分支  ,dev是这个分支的名字</p>
-        <p>git switch 分支名</p>
-        <p>git branch -d dev  删除不要的分支 ，同上</p>
-        <p>git switch 分支名</p><hr>
+    <h2>2. 提交到暂存区</h2>
+    <p>把所有改动放进暂存区（别忘了那个点！）：</p>
+    <div class="cmd-block">
+        <span class="comment">// 监控工作区状态树，提交所有变化（含修改、新增、删除）</span><br>
+        <code>git add .</code> <span class="comment">（注意空格和点）</span><br>
+        <code>git add -A</code> <span class="comment">（与点作用相同）</span>
+    </div>
 
-        <p>csdddd</p>
+    <h2>3. 提交到本地仓库</h2>
+    <div class="cmd-block">
+        <span class="comment">// 正式存入本地仓库并写好备注</span><br>
+        <code>git commit -m "这次我写了什么功能"</code>
+    </div>
 
+    <h2>4. 推送到远程</h2>
+    <div class="cmd-block">
+        <span class="comment">// 把本地进度同步到 GitHub 对应分支</span><br>
+        <code>git push origin master</code><br><br>
+        <span class="comment">// 拉取最新远程代码（防止冲突）</span><br>
+        <code>git pull</code>
+    </div>
+
+    <h1>第三步：分支管理</h1>
+    
+    <div class="cmd-block">
+        <span class="comment">// 查看本地对应远程的分支对应关系</span><br>
+        <code>git branch -vv</code><br><br>
+        <span class="comment">// 查看本地和远程所有分支</span><br>
+        <code>git branch -a</code><br><br>
+        <span class="comment">// 创建新分支</span><br>
+        <code>git branch dev</code><br><br>
+        <span class="comment">// 切换分支</span><br>
+        <code>git switch 分支名</code> <span class="comment">（或 git checkout 分支名）</span><br><br>
+        <span class="comment">// 新建并直接切换到该分支</span><br>
+        <code>git checkout -b xxx</code><br><br>
+        <span class="comment">// 合并 xxx 分支到当前分支</span><br>
+        <code>git merge xxx</code><br><br>
+        <span class="comment">// 删除本地分支（不能在当前分支删自己）</span><br>
+        <code>git branch -d dev</code><br><br>
+        <span class="comment">// 删除远程分支</span><br>
+        <code>git push origin --delete dev</code>
+    </div>
+
+    <h1>第四步：怎么回滚与撤销</h1>
+    <p>可以先看看之前的历史纪录：<code>git log --oneline</code></p>
+    <div class="cmd-block">
+        <span class="comment">// 1. 撤销工作区修改（清理掉不想改的代码）</span><br>
+        <code>git checkout .</code><br><br>
+
+        <span class="comment">// 2. 文件退出暂存区，但保留修改</span><br>
+        <code>git reset HEAD .</code><br><br>
+
+        <span class="comment">// 3. 撤销 commit，回到已 add 状态</span><br>
+        <code>git reset --soft HEAD^</code><br><br>
+
+        <span class="comment">// 4. 彻底回退到某个版本，不保留代码改动</span><br>
+        <code>git reset --hard &lt;commit_id&gt;</code><br><br>
+
+        <span class="comment">// 5. 强推到远程（谨慎使用）</span><br>
+        <code>git push -f</code>
+    </div>
+
+    <h1>第五步：代码贮藏 (Stash)</h1>
+    <div class="cmd-block">
+        <span class="comment">// 写错分支了？先存起来</span><br>
+        <code>git stash save "备注"</code><br><br>
+        <span class="comment">// 查看存了哪些</span><br>
+        <code>git stash list</code><br><br>
+        <span class="comment">// 切换分支后取出代码</span><br>
+        <code>git stash pop</code>
+    </div>
+
+    <h1>第六步：其他常用配置</h1>
+    <div class="cmd-block">
+        <span class="comment">// 查看远程版本库信息</span><br>
+        <code>git remote -v</code><br><br>
+        <span class="comment">// 查看项目所有 Git 配置</span><br>
+        <code>git config --list</code><br><br>
+        <span class="comment">// 修剪已经失效的远程分支记录</span><br>
+        <code>git remote prune origin</code>
+    </div>
 
 </body>
 </html>
