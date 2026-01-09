@@ -3,81 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git 进阶操作手册</title>
+    <title>Git 常用命令全集 - 手册</title>
     <style>
-        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; max-width: 1000px; margin: 0 auto; padding: 20px; color: #333; background-color: #f8f9fa; }
-        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 5px; margin-top: 40px; }
-        h2 { color: #2980b9; font-size: 1.3em; margin-top: 30px; }
-        .cmd-block { background-color: #282c34; color: #abb2bf; padding: 18px; border-radius: 8px; margin: 10px 0; overflow-x: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .cmd-block code { background: none; color: #98c379; padding: 0; font-family: 'Cascadia Code', Consolas, monospace; }
-        .comment { color: #5c6370; font-style: italic; }
-        .highlight { color: #e06c75; font-weight: bold; } /* 强调参数 */
-        .note-box { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1100px; margin: 0 auto; padding: 20px; background-color: #f4f7f9; }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-top: 40px; }
+        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 10px; }
+        p { margin: 10px 0; }
+        /* 代码块样式 */
+        .command-box { background-color: #282c34; border-radius: 8px; padding: 20px; margin: 15px 0; overflow-x: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        code { font-family: 'Fira Code', 'Consolas', monospace; font-size: 14px; }
+        .cmd { color: #98c379; font-weight: bold; } /* 命令绿色 */
+        .comment { color: #5c6370; font-style: italic; display: block; margin-top: 10px; margin-bottom: 2px; } /* 注释灰色 */
+        .comment:first-child { margin-top: 0; }
+        /* 辅助样式 */
+        hr { border: 0; border-top: 1px solid #dcdde1; margin: 30px 0; }
+        .note { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 4px; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
     </style>
 </head>
 <body>
 
-    <h1>分支合并与衍合 (Merge vs Rebase)</h1>
+    <h1>第一步：准备环境（只需做一次）</h1>
+    <div class="command-box">
+        <span class="comment">// 初始化本地项目仓库</span>
+        <code class="cmd">git init</code>
+        
+        <span class="comment">// 关联远程版本库</span>
+        <code class="cmd">git remote add origin https://github.com/xiaofneg666/lian.git</code>
+        
+        <span class="comment">// 克隆远程代码下来本地</span>
+        <code class="cmd">git clone xxxx</code>
+    </div>
+
+    <h1>第二步：日常开发流程（循环使用）</h1>
+    <div class="command-box">
+        <span class="comment">// 1. 当前分支状态查看（改动总览）</span>
+        <code class="cmd">git status</code>
+
+        <span class="comment">// 2. 修改的代码细节展示</span>
+        <code class="cmd">git diff</code>
+
+        <span class="comment">// 3. 把所有改动放进暂存区（Git 2.x后 . 和 -A 作用相同，包含修改、新增和删除）</span>
+        <code class="cmd">git add .</code>
+        <code class="cmd">git add -A</code>
+
+        <span class="comment">// 4. 提交暂存区文件到本地仓库</span>
+        <code class="cmd">git commit -m "这次我写了什么功能"</code>
+
+        <span class="comment">// 5. 拉取最新远程代码并快速合并</span>
+        <code class="cmd">git pull</code>
+
+        <span class="comment">// 6. 提交本地数据到远程分支 (例如 master)</span>
+        <code class="cmd">git push origin master</code>
+    </div>
+
+    <h1>第三步：分支管理与切换</h1>
     
-    <div class="note-box">
-        <strong>核心区别：</strong><br>
-        • <b>Merge</b> 会产生一个新的合并节点，保留完整的历史分支图谱。<br>
-        • <b>Rebase</b> 会重新定义起点，让提交历史变成一条直线，看起来更整洁，但会改变提交 ID。
+    <div class="command-box">
+        <span class="comment">// 查看本地对应远程的分支对应关系</span>
+        <code class="cmd">git branch -vv</code>
+
+        <span class="comment">// 查看本地和远程所有分支</span>
+        <code class="cmd">git branch -a</code>
+
+        <span class="comment">// 显示所有本地分支</span>
+        <code class="cmd">git branch</code>
+
+        <span class="comment">// 切换到已有的分支</span>
+        <code class="cmd">git checkout xxxx</code>
+        <code class="cmd">git switch xxxx</code>
+
+        <span class="comment">// 创建新分支但不切换</span>
+        <code class="cmd">git branch dev</code>
+
+        <span class="comment">// 以当前分支为基础新建并切换到xxx分支</span>
+        <code class="cmd">git checkout -b xxx</code>
+
+        <span class="comment">// 将本地分支与远程xxx分支进行关联</span>
+        <code class="cmd">git branch --set-upstream-to=origin/xxx</code>
+
+        <span class="comment">// 删除本地分支（当前分支不能为待删除分支）</span>
+        <code class="cmd">git branch -d dev</code>
+
+        <span class="comment">// 删除远程分支 (两种写法)</span>
+        <code class="cmd">git push origin --delete dev</code>
+        <code class="cmd">git push origin :dev</code>
     </div>
 
-    <div class="cmd-block">
-        <span class="comment">// 合并指定分支到当前分支（保留分支结构）</span><br>
-        <code>git merge &lt;branch&gt;</code><br><br>
-        
-        <span class="comment">// 衍合指定分支到当前分支（使历史线性化）</span><br>
-        <code>git rebase &lt;branch&gt;</code><br><br>
-        
-        <span class="comment">// 如果 rebase 遇到冲突，处理完冲突后继续：</span><br>
-        <code>git add .</code><br>
-        <code>git rebase --continue</code>
+    <h1>第四步：合并与衍合 (Merge & Rebase)</h1>
+    <div class="command-box">
+        <span class="comment">// 合并指定分支到当前分支（产生合并节点）</span>
+        <code class="cmd">git merge xxxx</code>
+
+        <span class="comment">// 衍合指定分支到当前分支（线性历史）</span>
+        <code class="cmd">git rebase xxxx</code>
+
+        <span class="comment">// 如果 rebase 遇到冲突，解决后：</span>
+        <code class="cmd">git add .</code>
+        <code class="cmd">git rebase --continue</code>
     </div>
 
-    <h1>远程操作 (Remote Operations)</h1>
-    <div class="cmd-block">
-        <span class="comment">// 查看远程版本库信息（显示简略/详细信息）</span><br>
-        <code>git remote -v</code><br><br>
-        
-        <span class="comment">// 查看指定远程库（如 origin）的详细信息（含分支对应关系）</span><br>
-        <code>git remote show origin</code><br><br>
-        
-        <span class="comment">// 添加新的远程版本库关联</span><br>
-        <code>git remote add &lt;remote_name&gt; &lt;url&gt;</code><br><br>
-        
-        <span class="comment">// 从远程库获取最新代码到本地，但不自动合并</span><br>
-        <code>git fetch origin</code><br><br>
-        
-        <span class="comment">// 下载代码并快速合并到当前分支 (相当于 fetch + merge)</span><br>
-        <code>git pull origin &lt;branch&gt;</code><br><br>
-        
-        <span class="comment">// 上传本地代码及快速合并到远程分支</span><br>
-        <code>git push origin &lt;branch&gt;</code>
+    <h1>第五步：回滚、撤销与强制推送</h1>
+    <div class="note">
+        <strong>HEAD 说明：</strong> HEAD^ 表示上一个版本，HEAD^^ 表示上上个版本。
+    </div>
+    <div class="command-box">
+        <span class="comment">// 查看历史纪录（精简版）</span>
+        <code class="cmd">git log --oneline</code>
+
+        <span class="comment">// 修改的部分代码清理掉不修改了（丢弃工作区修改）</span>
+        <code class="cmd">git checkout .</code>
+
+        <span class="comment">// 撤销所有已经 add 的文件：</span>
+        <code class="cmd">git reset HEAD .</code>
+
+        <span class="comment">// 撤销某个文件或文件夹的 add 状态：</span>
+        <code class="cmd">git reset HEAD filename</code>
+
+        <span class="comment">// 撤销 commit 之后返回成暂存区 add 状态（保留代码）</span>
+        <code class="cmd">git reset --soft HEAD^</code>
+
+        <span class="comment">// 撤销 commit 连带代码改动直接消失（不保留代码）</span>
+        <code class="cmd">git reset --hard HEAD^</code>
+
+        <span class="comment">// 强行推送到远程版本（慎用）</span>
+        <code class="cmd">git push -f -u origin master</code>
     </div>
 
-    <h1>标签与远程删除 (Tags & Delete)</h1>
-    <div class="cmd-block">
-        <span class="comment">// 删除远程分支（写法1：冒号法，较老旧）</span><br>
-        <code>git push origin :&lt;branch-name&gt;</code><br><br>
-        
-        <span class="comment">// 删除远程分支（写法2：现代写法，语义更清晰 - 推荐）</span><br>
-        <code>git push origin --delete &lt;branch-name&gt;</code><br><br>
-        
-        <span class="comment">// 删除远程标签 (Tag)</span><br>
-        <code>git push origin :refs/tags/&lt;tag-name&gt;</code><br><br>
-        
-        <span class="comment">// 将本地所有标签一次性上传到远程</span><br>
-        <code>git push --tags</code><br><br>
-        
-        <span class="comment">// 将单个指定标签上传到远程</span><br>
-        <code>git push origin &lt;tag-name&gt;</code>
+    <h1>第六步：代码贮藏 (Stash)</h1>
+    <div class="command-box">
+        <span class="comment">// 贮藏修改（代码没写完又需要切分支时使用）</span>
+        <code class="cmd">git stash save "备注信息"</code>
+
+        <span class="comment">// 查看所有贮藏记录</span>
+        <code class="cmd">git stash list</code>
+
+        <span class="comment">// 释放最近一次贮藏并恢复到当前分支</span>
+        <code class="cmd">git stash pop</code>
+
+        <span class="comment">// 恢复指定的某个贮藏</span>
+        <code class="cmd">git stash pop stash@{$num}</code>
     </div>
 
-    <div class="note-box" style="background:#e8f4fd; border-left-color: #2196f3;">
-        <strong>小贴士：</strong> 在执行 <code>git push -f</code> (强制推送) 之前，务必确保你清楚这会覆盖远程代码，通常只在个人分支或 Rebase 之后使用。
+    <h1>第七步：远程库信息与标签 (Remote & Tags)</h1>
+    <div class="command-box">
+        <span class="comment">// 查看远程版本库详细信息</span>
+        <code class="cmd">git remote -v</code>
+        <code class="cmd">git remote show origin</code>
+
+        <span class="comment">// 从远程库获取代码但不合并</span>
+        <code class="cmd">git fetch origin</code>
+
+        <span class="comment">// 上传所有本地标签 (Tags)</span>
+        <code class="cmd">git push --tags</code>
+
+        <span class="comment">// 删除远程标签</span>
+        <code class="cmd">git push origin :refs/tags/tag-name</code>
+
+        <span class="comment">// 修剪掉已经删除远程分支的本地缓存</span>
+        <code class="cmd">git remote prune origin</code>
+    </div>
+
+    <div class="note" style="text-align: center; background: #e8f4fd; border-left-color: #2196f3;">
+        © Git 常用命令手册 - 持续学习，持续进步
     </div>
 
 </body>
