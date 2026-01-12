@@ -168,6 +168,37 @@
             color: #546e7a;
             line-height: 1.6;
         }
+        /* 左右分栏布局 */
+        .step-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            align-items: flex-start;
+        }
+        .command-container, .example-container {
+            flex: 1;
+            min-width: 0;
+        }
+        .command-box {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 0;
+            overflow-x: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 2px solid #4a90e2;
+            height: 100%;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            border-left: 5px solid #2196f3;
+            padding: 25px;
+            margin: 0;
+            border-radius: 12px;
+            font-size: 14px;
+            box-shadow: 0 8px 20px rgba(33,150,243,0.1);
+            height: 100%;
+        }
         .search-container {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 25px;
@@ -227,6 +258,18 @@
         .step-section {
             scroll-margin-top: 100px;
         }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .step-container {
+                flex-direction: column;
+            }
+            .command-container, .example-container {
+                width: 100%;
+            }
+            .command-box, .example-box {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -245,30 +288,35 @@
         </div>
 
         <h1 class="step-section" id="step-0"><span class="step-number">0</span>前置准备：Git 安装与配置</h1>
-        <div class="command-box">
-            <span class="comment">// 检查 Git 是否已安装</span>
-            <code class="cmd">git --version</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 检查 Git 是否已安装</span>
+                    <code class="cmd">git --version</code>
 
-            <span class="comment">// 配置用户名（首次使用必须配置）</span>
-            <code class="cmd">git config --global user.name "你的用户名"</code>
+                    <span class="comment">// 配置用户名（首次使用必须配置）</span>
+                    <code class="cmd">git config --global user.name "你的用户名"</code>
 
-            <span class="comment">// 配置邮箱（首次使用必须配置）</span>
-            <code class="cmd">git config --global user.email "你的邮箱@example.com"</code>
+                    <span class="comment">// 配置邮箱（首次使用必须配置）</span>
+                    <code class="cmd">git config --global user.email "你的邮箱@example.com"</code>
 
-            <span class="comment">// 查看当前配置</span>
-            <code class="cmd">git config --list</code>
+                    <span class="comment">// 查看当前配置</span>
+                    <code class="cmd">git config --list</code>
 
-            <span class="comment">// 配置默认分支名为 main</span>
-            <code class="cmd">git config --global init.defaultBranch main</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                首次安装 Git 后，需要配置身份信息：<br>
-                <code>git config --global user.name "zhangsan"</code><br>
-                <code>git config --global user.email "zhangsan@example.com"</code><br>
-                这样每次提交时，Git 就知道是谁提交的代码。
+                    <span class="comment">// 配置默认分支名为 main</span>
+                    <code class="cmd">git config --global init.defaultBranch main</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        首次安装 Git 后，需要配置身份信息：<br>
+                        <code>git config --global user.name "zhangsan"</code><br>
+                        <code>git config --global user.email "zhangsan@example.com"</code><br>
+                        这样每次提交时，Git 就知道是谁提交的代码。
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -277,162 +325,182 @@
         </div>
 
         <h1 class="step-section" id="step-1"><span class="step-number">1</span>第一步：准备环境（只需做一次）</h1>
-        <div class="command-box">
-            <span class="comment">// 初始化本地项目仓库</span>
-            <code class="cmd">git init</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 初始化本地项目仓库</span>
+                    <code class="cmd">git init</code>
 
-            <span class="comment">// 克隆远程仓库到本地（推荐方式）</span>
-            <code class="cmd">git clone https://github.com/用户名/仓库名.git</code>
+                    <span class="comment">// 克隆远程仓库到本地（推荐方式）</span>
+                    <code class="cmd">git clone https://github.com/用户名/仓库名.git</code>
 
-            <span class="comment">// 使用 SSH 方式克隆（更安全）</span>
-            <code class="cmd">git clone git@github.com:用户名/仓库名.git</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景1：本地新建项目<br>
-                <code>cd my-project</code><br>
-                <code>git init</code>  // 创建 .git 文件夹，开始版本控制<br><br>
-                场景2：参与团队项目<br>
-                <code>git clone https://github.com/facebook/react.git</code>  // 下载 React 源码到本地
+                    <span class="comment">// 使用 SSH 方式克隆（更安全）</span>
+                    <code class="cmd">git clone git@github.com:用户名/仓库名.git</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景1：本地新建项目<br>
+                        <code>cd my-project</code><br>
+                        <code>git init</code>  // 创建 .git 文件夹，开始版本控制<br><br>
+                        场景2：参与团队项目<br>
+                        <code>git clone https://github.com/facebook/react.git</code>  // 下载 React 源码到本地
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-2"><span class="step-number">2</span>第二步：日常开发流程（循环使用）</h1>
-        <div class="command-box">
-            <span class="comment">// 1. 查看当前分支状态（改动总览）</span>
-            <code class="cmd">git status</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 1. 查看当前分支状态（改动总览）</span>
+                    <code class="cmd">git status</code>
 
-            <span class="comment">// 2. 查看修改的代码细节</span>
-            <code class="cmd">git diff</code>
+                    <span class="comment">// 2. 查看修改的代码细节</span>
+                    <code class="cmd">git diff</code>
 
-            <span class="comment">// 3. 查看某个文件的修改内容</span>
-            <code class="cmd">git diff 文件名</code>
+                    <span class="comment">// 3. 查看某个文件的修改内容</span>
+                    <code class="cmd">git diff 文件名</code>
 
-            <span class="comment">// 4. 把所有改动放进暂存区（Git 2.x 后 . 和 -A 作用相同）</span>
-            <code class="cmd">git add .</code>
-            <code class="cmd">git add -A</code>
+                    <span class="comment">// 4. 把所有改动放进暂存区（Git 2.x 后 . 和 -A 作用相同）</span>
+                    <code class="cmd">git add .</code>
+                    <code class="cmd">git add -A</code>
 
-            <span class="comment">// 5. 把指定文件放进暂存区</span>
-            <code class="cmd">git add 文件名</code>
+                    <span class="comment">// 5. 把指定文件放进暂存区</span>
+                    <code class="cmd">git add 文件名</code>
 
-            <span class="comment">// 6. 提交暂存区文件到本地仓库</span>
-            <code class="cmd">git commit -m "提交说明：描述本次修改的内容"</code>
+                    <span class="comment">// 6. 提交暂存区文件到本地仓库</span>
+                    <code class="cmd">git commit -m "提交说明：描述本次修改的内容"</code>
 
-            <span class="comment">// 7. 提交并跳过暂存区（直接提交所有修改）</span>
-            <code class="cmd">git commit -am "提交说明"</code>
+                    <span class="comment">// 7. 提交并跳过暂存区（直接提交所有修改）</span>
+                    <code class="cmd">git commit -am "提交说明"</code>
 
-            <span class="comment">// 8. 拉取最新远程代码并合并</span>
-            <code class="cmd">git pull</code>
+                    <span class="comment">// 8. 拉取最新远程代码并合并</span>
+                    <code class="cmd">git pull</code>
 
-            <span class="comment">// 9. 拉取远程代码并使用 rebase 方式合并（保持历史线性）</span>
-            <code class="cmd">git pull --rebase</code>
+                    <span class="comment">// 9. 拉取远程代码并使用 rebase 方式合并（保持历史线性）</span>
+                    <code class="cmd">git pull --rebase</code>
 
-            <span class="comment">// 10. 提交本地数据到远程分支</span>
-            <code class="cmd">git push origin 分支名</code>
+                    <span class="comment">// 10. 提交本地数据到远程分支</span>
+                    <code class="cmd">git push origin 分支名</code>
 
-            <span class="comment">// 11. 首次推送并建立跟踪关系</span>
-            <code class="cmd">git push -u origin 分支名</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                完整的提交流程：<br>
-                <code>git status</code>  // 看到 index.html 被修改<br>
-                <code>git diff index.html</code>  // 查看具体改了什么<br>
-                <code>git add index.html</code>  // 添加到暂存区<br>
-                <code>git commit -m "修复首页导航栏样式"</code>  // 提交<br>
-                <code>git pull</code>  // 拉取同事的最新代码<br>
-                <code>git push</code>  // 推送到远程仓库
+                    <span class="comment">// 11. 首次推送并建立跟踪关系</span>
+                    <code class="cmd">git push -u origin 分支名</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        完整的提交流程：<br>
+                        <code>git status</code>  // 看到 index.html 被修改<br>
+                        <code>git diff index.html</code>  // 查看具体改了什么<br>
+                        <code>git add index.html</code>  // 添加到暂存区<br>
+                        <code>git commit -m "修复首页导航栏样式"</code>  // 提交<br>
+                        <code>git pull</code>  // 拉取同事的最新代码<br>
+                        <code>git push</code>  // 推送到远程仓库
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-3"><span class="step-number">3</span>第三步：分支管理与切换</h1>
-        <div class="command-box">
-            <span class="comment">// 查看本地分支</span>
-            <code class="cmd">git branch</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 查看本地分支</span>
+                    <code class="cmd">git branch</code>
 
-            <span class="comment">// 查看本地和远程所有分支</span>
-            <code class="cmd">git branch -a</code>
+                    <span class="comment">// 查看本地和远程所有分支</span>
+                    <code class="cmd">git branch -a</code>
 
-            <span class="comment">// 查看本地分支与远程分支的对应关系</span>
-            <code class="cmd">git branch -vv</code>
+                    <span class="comment">// 查看本地分支与远程分支的对应关系</span>
+                    <code class="cmd">git branch -vv</code>
 
-            <span class="comment">// 创建新分支但不切换</span>
-            <code class="cmd">git branch 分支名</code>
+                    <span class="comment">// 创建新分支但不切换</span>
+                    <code class="cmd">git branch 分支名</code>
 
-            <span class="comment">// 创建并切换到新分支</span>
-            <code class="cmd">git checkout -b 分支名</code>
-            <code class="cmd">git switch -c 分支名</code>
+                    <span class="comment">// 创建并切换到新分支</span>
+                    <code class="cmd">git checkout -b 分支名</code>
+                    <code class="cmd">git switch -c 分支名</code>
 
-            <span class="comment">// 切换到已有分支</span>
-            <code class="cmd">git checkout 分支名</code>
-            <code class="cmd">git switch 分支名</code>
+                    <span class="comment">// 切换到已有分支</span>
+                    <code class="cmd">git checkout 分支名</code>
+                    <code class="cmd">git switch 分支名</code>
 
-            <span class="comment">// 切换到上一个分支</span>
-            <code class="cmd">git checkout -</code>
+                    <span class="comment">// 切换到上一个分支</span>
+                    <code class="cmd">git checkout -</code>
 
-            <span class="comment">// 重命名当前分支</span>
-            <code class="cmd">git branch -m 新分支名</code>
+                    <span class="comment">// 重命名当前分支</span>
+                    <code class="cmd">git branch -m 新分支名</code>
 
-            <span class="comment">// 删除本地分支（不能删除当前所在分支）</span>
-            <code class="cmd">git branch -d 分支名</code>
+                    <span class="comment">// 删除本地分支（不能删除当前所在分支）</span>
+                    <code class="cmd">git branch -d 分支名</code>
 
-            <span class="comment">// 强制删除本地分支</span>
-            <code class="cmd">git branch -D 分支名</code>
+                    <span class="comment">// 强制删除本地分支</span>
+                    <code class="cmd">git branch -D 分支名</code>
 
-            <span class="comment">// 删除远程分支（两种写法）</span>
-            <code class="cmd">git push origin --delete 分支名</code>
-            <code class="cmd">git push origin :分支名</code>
+                    <span class="comment">// 删除远程分支（两种写法）</span>
+                    <code class="cmd">git push origin --delete 分支名</code>
+                    <code class="cmd">git push origin :分支名</code>
 
-            <span class="comment">// 将本地分支与远程分支建立关联</span>
-            <code class="cmd">git branch --set-upstream-to=origin/分支名</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                开发新功能时创建分支：<br>
-                <code>git checkout -b feature-login</code>  // 创建并切换到登录功能分支<br>
-                <code>git checkout -b hotfix-bug123</code>  // 创建紧急修复分支<br>
-                <code>git checkout main</code>  // 切回主分支<br>
-                <code>git branch -d feature-login</code>  // 功能完成后删除分支
+                    <span class="comment">// 将本地分支与远程分支建立关联</span>
+                    <code class="cmd">git branch --set-upstream-to=origin/分支名</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        开发新功能时创建分支：<br>
+                        <code>git checkout -b feature-login</code>  // 创建并切换到登录功能分支<br>
+                        <code>git checkout -b hotfix-bug123</code>  // 创建紧急修复分支<br>
+                        <code>git checkout main</code>  // 切回主分支<br>
+                        <code>git branch -d feature-login</code>  // 功能完成后删除分支
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-4"><span class="step-number">4</span>第四步：合并与衍合 (Merge & Rebase)</h1>
-        <div class="command-box">
-            <span class="comment">// 合并指定分支到当前分支（产生合并节点）</span>
-            <code class="cmd">git merge 分支名</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 合并指定分支到当前分支（产生合并节点）</span>
+                    <code class="cmd">git merge 分支名</code>
 
-            <span class="comment">// 合并时不要自动提交</span>
-            <code class="cmd">git merge --no-commit 分支名</code>
+                    <span class="comment">// 合并时不要自动提交</span>
+                    <code class="cmd">git merge --no-commit 分支名</code>
 
-            <span class="comment">// 衍合指定分支到当前分支（线性历史）</span>
-            <code class="cmd">git rebase 分支名</code>
+                    <span class="comment">// 衍合指定分支到当前分支（线性历史）</span>
+                    <code class="cmd">git rebase 分支名</code>
 
-            <span class="comment">// 如果 rebase 遇到冲突，解决后：</span>
-            <code class="cmd">git add .</code>
-            <code class="cmd">git rebase --continue</code>
+                    <span class="comment">// 如果 rebase 遇到冲突，解决后：</span>
+                    <code class="cmd">git add .</code>
+                    <code class="cmd">git rebase --continue</code>
 
-            <span class="comment">// 放弃 rebase 操作</span>
-            <code class="cmd">git rebase --abort</code>
+                    <span class="comment">// 放弃 rebase 操作</span>
+                    <code class="cmd">git rebase --abort</code>
 
-            <span class="comment">// 跳过当前冲突的提交</span>
-            <code class="cmd">git rebase --skip</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景：将功能分支合并到主分支<br>
-                <code>git checkout main</code>  // 切到主分支<br>
-                <code>git merge feature-login</code>  // 合并登录功能<br><br>
-                使用 rebase 保持历史清晰（个人开发时）：<br>
-                <code>git checkout feature-login</code><br>
-                <code>git rebase main</code>  // 将 feature-login 变基到 main 最新
+                    <span class="comment">// 跳过当前冲突的提交</span>
+                    <code class="cmd">git rebase --skip</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景：将功能分支合并到主分支<br>
+                        <code>git checkout main</code>  // 切到主分支<br>
+                        <code>git merge feature-login</code>  // 合并登录功能<br><br>
+                        使用 rebase 保持历史清晰（个人开发时）：<br>
+                        <code>git checkout feature-login</code><br>
+                        <code>git rebase main</code>  // 将 feature-login 变基到 main 最新
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -444,53 +512,58 @@
         <div class="note">
             <strong>📌 HEAD 说明：</strong> HEAD^ 表示上一个版本，HEAD^^ 表示上上个版本，HEAD~3 表示往前3个版本
         </div>
-        <div class="command-box">
-            <span class="comment">// 查看提交历史（精简版）</span>
-            <code class="cmd">git log --oneline</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 查看提交历史（精简版）</span>
+                    <code class="cmd">git log --oneline</code>
 
-            <span class="comment">// 查看提交历史（图形化显示）</span>
-            <code class="cmd">git log --graph --oneline --all</code>
+                    <span class="comment">// 查看提交历史（图形化显示）</span>
+                    <code class="cmd">git log --graph --oneline --all</code>
 
-            <span class="comment">// 丢弃工作区所有修改（恢复到最后一次提交状态）</span>
-            <code class="cmd">git checkout .</code>
-            <code class="cmd">git restore .</code>
+                    <span class="comment">// 丢弃工作区所有修改（恢复到最后一次提交状态）</span>
+                    <code class="cmd">git checkout .</code>
+                    <code class="cmd">git restore .</code>
 
-            <span class="comment">// 丢弃指定文件的修改</span>
-            <code class="cmd">git checkout 文件名</code>
-            <code class="cmd">git restore 文件名</code>
+                    <span class="comment">// 丢弃指定文件的修改</span>
+                    <code class="cmd">git checkout 文件名</code>
+                    <code class="cmd">git restore 文件名</code>
 
-            <span class="comment">// 撤销所有已 add 的文件（从暂存区移除）</span>
-            <code class="cmd">git reset HEAD .</code>
+                    <span class="comment">// 撤销所有已 add 的文件（从暂存区移除）</span>
+                    <code class="cmd">git reset HEAD .</code>
 
-            <span class="comment">// 撤销指定文件的 add 状态</span>
-            <code class="cmd">git reset HEAD 文件名</code>
+                    <span class="comment">// 撤销指定文件的 add 状态</span>
+                    <code class="cmd">git reset HEAD 文件名</code>
 
-            <span class="comment">// 撤销 commit，保留代码在暂存区</span>
-            <code class="cmd">git reset --soft HEAD^</code>
+                    <span class="comment">// 撤销 commit，保留代码在暂存区</span>
+                    <code class="cmd">git reset --soft HEAD^</code>
 
-            <span class="comment">// 撤销 commit，保留代码在工作区</span>
-            <code class="cmd">git reset --mixed HEAD^</code>
+                    <span class="comment">// 撤销 commit，保留代码在工作区</span>
+                    <code class="cmd">git reset --mixed HEAD^</code>
 
-            <span class="comment">// 撤销 commit，代码改动直接消失（危险操作）</span>
-            <code class="cmd">git reset --hard HEAD^</code>
+                    <span class="comment">// 撤销 commit，代码改动直接消失（危险操作）</span>
+                    <code class="cmd">git reset --hard HEAD^</code>
 
-            <span class="comment">// 回滚到指定版本（保留代码）</span>
-            <code class="cmd">git reset --soft 版本号</code>
+                    <span class="comment">// 回滚到指定版本（保留代码）</span>
+                    <code class="cmd">git reset --soft 版本号</code>
 
-            <span class="comment">// 强制推送到远程（慎用！会覆盖远程历史）</span>
-            <code class="cmd">git push -f origin 分支名</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景1：修改错了，想撤销<br>
-                <code>git checkout index.html</code>  // 撤销 index.html 的修改<br><br>
-                场景2：add 错文件了<br>
-                <code>git reset HEAD config.js</code>  // 把 config.js 移出暂存区<br><br>
-                场景3：commit 写错了，想重新提交<br>
-                <code>git reset --soft HEAD^</code>  // 撤销最后一次 commit，保留修改<br>
-                <code>git commit -m "正确的提交信息"</code>
+                    <span class="comment">// 强制推送到远程（慎用！会覆盖远程历史）</span>
+                    <code class="cmd">git push -f origin 分支名</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景1：修改错了，想撤销<br>
+                        <code>git checkout index.html</code>  // 撤销 index.html 的修改<br><br>
+                        场景2：add 错文件了<br>
+                        <code>git reset HEAD config.js</code>  // 把 config.js 移出暂存区<br><br>
+                        场景3：commit 写错了，想重新提交<br>
+                        <code>git reset --soft HEAD^</code>  // 撤销最后一次 commit，保留修改<br>
+                        <code>git commit -m "正确的提交信息"</code>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -499,134 +572,149 @@
         </div>
 
         <h1 class="step-section" id="step-6"><span class="step-number">6</span>第六步：代码贮藏 (Stash)</h1>
-        <div class="command-box">
-            <span class="comment">// 贮藏当前修改（代码没写完又需要切分支时使用）</span>
-            <code class="cmd">git stash save "备注信息"</code>
-            <code class="cmd">git stash push -m "备注信息"</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 贮藏当前修改（代码没写完又需要切分支时使用）</span>
+                    <code class="cmd">git stash save "备注信息"</code>
+                    <code class="cmd">git stash push -m "备注信息"</code>
 
-            <span class="comment">// 贮藏未跟踪的文件</span>
-            <code class="cmd">git stash -u</code>
+                    <span class="comment">// 贮藏未跟踪的文件</span>
+                    <code class="cmd">git stash -u</code>
 
-            <span class="comment">// 查看所有贮藏记录</span>
-            <code class="cmd">git stash list</code>
+                    <span class="comment">// 查看所有贮藏记录</span>
+                    <code class="cmd">git stash list</code>
 
-            <span class="comment">// 查看贮藏的具体内容</span>
-            <code class="cmd">git stash show stash@{0}</code>
+                    <span class="comment">// 查看贮藏的具体内容</span>
+                    <code class="cmd">git stash show stash@{0}</code>
 
-            <span class="comment">// 恢复最近一次贮藏并删除该记录</span>
-            <code class="cmd">git stash pop</code>
+                    <span class="comment">// 恢复最近一次贮藏并删除该记录</span>
+                    <code class="cmd">git stash pop</code>
 
-            <span class="comment">// 恢复指定的贮藏</span>
-            <code class="cmd">git stash pop stash@{n}</code>
+                    <span class="comment">// 恢复指定的贮藏</span>
+                    <code class="cmd">git stash pop stash@{n}</code>
 
-            <span class="comment">// 恢复贮藏但不删除记录</span>
-            <code class="cmd">git stash apply</code>
+                    <span class="comment">// 恢复贮藏但不删除记录</span>
+                    <code class="cmd">git stash apply</code>
 
-            <span class="comment">// 删除指定的贮藏</span>
-            <code class="cmd">git stash drop stash@{n}</code>
+                    <span class="comment">// 删除指定的贮藏</span>
+                    <code class="cmd">git stash drop stash@{n}</code>
 
-            <span class="comment">// 清空所有贮藏</span>
-            <code class="cmd">git stash clear</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景：正在开发功能 A，突然需要紧急修复 bug<br>
-                <code>git stash push -m "功能A开发到一半"</code>  // 保存当前进度<br>
-                <code>git checkout -b hotfix-bug</code>  // 切到修复分支<br>
-                <code>git commit -m "修复紧急bug"</code>  // 修复并提交<br>
-                <code>git checkout feature-A</code>  // 切回功能A分支<br>
-                <code>git stash pop</code>  // 恢复之前的开发进度
+                    <span class="comment">// 清空所有贮藏</span>
+                    <code class="cmd">git stash clear</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景：正在开发功能 A，突然需要紧急修复 bug<br>
+                        <code>git stash push -m "功能A开发到一半"</code>  // 保存当前进度<br>
+                        <code>git checkout -b hotfix-bug</code>  // 切到修复分支<br>
+                        <code>git commit -m "修复紧急bug"</code>  // 修复并提交<br>
+                        <code>git checkout feature-A</code>  // 切回功能A分支<br>
+                        <code>git stash pop</code>  // 恢复之前的开发进度
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-7"><span class="step-number">7</span>第七步：远程库信息与标签 (Remote & Tags)</h1>
-        <div class="command-box">
-            <span class="comment">// 查看远程仓库地址</span>
-            <code class="cmd">git remote -v</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 查看远程仓库地址</span>
+                    <code class="cmd">git remote -v</code>
 
-            <span class="comment">// 查看远程仓库详细信息</span>
-            <code class="cmd">git remote show origin</code>
+                    <span class="comment">// 查看远程仓库详细信息</span>
+                    <code class="cmd">git remote show origin</code>
 
-            <span class="comment">// 添加远程仓库</span>
-            <code class="cmd">git remote add origin 仓库地址</code>
+                    <span class="comment">// 添加远程仓库</span>
+                    <code class="cmd">git remote add origin 仓库地址</code>
 
-            <span class="comment">// 修改远程仓库地址</span>
-            <code class="cmd">git remote set-url origin 新地址</code>
+                    <span class="comment">// 修改远程仓库地址</span>
+                    <code class="cmd">git remote set-url origin 新地址</code>
 
-            <span class="comment">// 删除远程仓库关联</span>
-            <code class="cmd">git remote remove origin</code>
+                    <span class="comment">// 删除远程仓库关联</span>
+                    <code class="cmd">git remote remove origin</code>
 
-            <span class="comment">// 从远程获取代码但不合并</span>
-            <code class="cmd">git fetch origin</code>
+                    <span class="comment">// 从远程获取代码但不合并</span>
+                    <code class="cmd">git fetch origin</code>
 
-            <span class="comment">// 创建标签（轻量标签）</span>
-            <code class="cmd">git tag v1.0.0</code>
+                    <span class="comment">// 创建标签（轻量标签）</span>
+                    <code class="cmd">git tag v1.0.0</code>
 
-            <span class="comment">// 创建标签（附注标签，推荐）</span>
-            <code class="cmd">git tag -a v1.0.0 -m "版本说明"</code>
+                    <span class="comment">// 创建标签（附注标签，推荐）</span>
+                    <code class="cmd">git tag -a v1.0.0 -m "版本说明"</code>
 
-            <span class="comment">// 查看所有标签</span>
-            <code class="cmd">git tag</code>
+                    <span class="comment">// 查看所有标签</span>
+                    <code class="cmd">git tag</code>
 
-            <span class="comment">// 查看标签详情</span>
-            <code class="cmd">git show v1.0.0</code>
+                    <span class="comment">// 查看标签详情</span>
+                    <code class="cmd">git show v1.0.0</code>
 
-            <span class="comment">// 推送指定标签到远程</span>
-            <code class="cmd">git push origin v1.0.0</code>
+                    <span class="comment">// 推送指定标签到远程</span>
+                    <code class="cmd">git push origin v1.0.0</code>
 
-            <span class="comment">// 推送所有标签到远程</span>
-            <code class="cmd">git push --tags</code>
+                    <span class="comment">// 推送所有标签到远程</span>
+                    <code class="cmd">git push --tags</code>
 
-            <span class="comment">// 删除本地标签</span>
-            <code class="cmd">git tag -d v1.0.0</code>
+                    <span class="comment">// 删除本地标签</span>
+                    <code class="cmd">git tag -d v1.0.0</code>
 
-            <span class="comment">// 删除远程标签</span>
-            <code class="cmd">git push origin :refs/tags/v1.0.0</code>
+                    <span class="comment">// 删除远程标签</span>
+                    <code class="cmd">git push origin :refs/tags/v1.0.0</code>
 
-            <span class="comment">// 清理远程已删除的分支缓存</span>
-            <code class="cmd">git remote prune origin</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景：项目发布 1.0 版本<br>
-                <code>git tag -a v1.0.0 -m "正式发布 1.0 版本"</code>  // 创建标签<br>
-                <code>git push origin v1.0.0</code>  // 推送标签到远程<br>
-                <code>git tag -a v1.1.0 -m "添加新功能"</code>  // 后续版本<br>
-                <code>git push --tags</code>  // 推送所有标签
+                    <span class="comment">// 清理远程已删除的分支缓存</span>
+                    <code class="cmd">git remote prune origin</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景：项目发布 1.0 版本<br>
+                        <code>git tag -a v1.0.0 -m "正式发布 1.0 版本"</code>  // 创建标签<br>
+                        <code>git push origin v1.0.0</code>  // 推送标签到远程<br>
+                        <code>git tag -a v1.1.0 -m "添加新功能"</code>  // 后续版本<br>
+                        <code>git push --tags</code>  // 推送所有标签
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-8"><span class="step-number">8</span>第八步：忽略文件 (.gitignore)</h1>
-        <div class="command-box">
-            <span class="comment">// 创建 .gitignore 文件（在项目根目录）</span>
-            <code class="cmd"># 常见忽略规则示例</code>
-            <code class="cmd">node_modules/          # 依赖包</code>
-            <code class="cmd">dist/                 # 打包输出</code>
-            <code class="cmd">.env                  # 环境变量</code>
-            <code class="cmd">*.log                 # 日志文件</code>
-            <code class="cmd">.DS_Store             # Mac 系统文件</code>
-            <code class="cmd">Thumbs.db             # Windows 缩略图</code>
-            <code class="cmd">.idea/                # IDE 配置</code>
-            <code class="cmd">*.iml                 # IDEA 文件</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                Vue 项目的 .gitignore 示例：<br>
-                <code># 依赖</code><br>
-                <code>node_modules/</code><br>
-                <code># 打包输出</code><br>
-                <code>dist/</code><br>
-                <code># 环境变量</code><br>
-                <code>.env.local</code><br>
-                <code>.env.*.local</code><br>
-                <code># 日志</code><br>
-                <code>npm-debug.log*</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 创建 .gitignore 文件（在项目根目录）</span>
+                    <code class="cmd"># 常见忽略规则示例</code>
+                    <code class="cmd">node_modules/          # 依赖包</code>
+                    <code class="cmd">dist/                 # 打包输出</code>
+                    <code class="cmd">.env                  # 环境变量</code>
+                    <code class="cmd">*.log                 # 日志文件</code>
+                    <code class="cmd">.DS_Store             # Mac 系统文件</code>
+                    <code class="cmd">Thumbs.db             # Windows 缩略图</code>
+                    <code class="cmd">.idea/                # IDE 配置</code>
+                    <code class="cmd">*.iml                 # IDEA 文件</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        Vue 项目的 .gitignore 示例：<br>
+                        <code># 依赖</code><br>
+                        <code>node_modules/</code><br>
+                        <code># 打包输出</code><br>
+                        <code>dist/</code><br>
+                        <code># 环境变量</code><br>
+                        <code>.env.local</code><br>
+                        <code>.env.*.local</code><br>
+                        <code># 日志</code><br>
+                        <code>npm-debug.log*</code>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -635,34 +723,39 @@
         </div>
 
         <h1 class="step-section" id="step-9"><span class="step-number">9</span>第九步：冲突解决</h1>
-        <div class="command-box">
-            <span class="comment">// 当出现冲突时，Git 会标记冲突文件</span>
-            <code class="cmd">// 打开冲突文件，会看到类似这样的标记：</code>
-            <code class="cmd">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>
-            <code class="cmd">当前分支的内容</code>
-            <code class="cmd">=======</code>
-            <code class="cmd">合并分支的内容</code>
-            <code class="cmd">&gt;&gt;&gt;&gt;&gt;&gt;&gt; 分支名</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 当出现冲突时，Git 会标记冲突文件</span>
+                    <code class="cmd">// 打开冲突文件，会看到类似这样的标记：</code>
+                    <code class="cmd">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>
+                    <code class="cmd">当前分支的内容</code>
+                    <code class="cmd">=======</code>
+                    <code class="cmd">合并分支的内容</code>
+                    <code class="cmd">&gt;&gt;&gt;&gt;&gt;&gt;&gt; 分支名</code>
 
-            <span class="comment">// 解决冲突步骤：</span>
-            <code class="cmd">1. 手动编辑文件，保留需要的内容，删除冲突标记</code>
-            <code class="cmd">2. git add .  （标记冲突已解决）</code>
-            <code class="cmd">3. git commit -m "解决冲突"</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景：你和同事同时修改了 index.html 的同一行<br>
-                <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code><br>
-                <code>&lt;div class="header"&gt;我的版本&lt;/div&gt;</code><br>
-                <code>=======</code><br>
-                <code>&lt;div class="header"&gt;同事的版本&lt;/div&gt;</code><br>
-                <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-login</code><br><br>
-                解决：编辑文件，保留需要的版本，删除标记<br>
-                <code>&lt;div class="header"&gt;合并后的版本&lt;/div&gt;</code><br>
-                <code>git add index.html</code><br>
-                <code>git commit -m "解决 index.html 冲突"</code>
+                    <span class="comment">// 解决冲突步骤：</span>
+                    <code class="cmd">1. 手动编辑文件，保留需要的内容，删除冲突标记</code>
+                    <code class="cmd">2. git add .  （标记冲突已解决）</code>
+                    <code class="cmd">3. git commit -m "解决冲突"</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景：你和同事同时修改了 index.html 的同一行<br>
+                        <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code><br>
+                        <code>&lt;div class="header"&gt;我的版本&lt;/div&gt;</code><br>
+                        <code>=======</code><br>
+                        <code>&lt;div class="header"&gt;同事的版本&lt;/div&gt;</code><br>
+                        <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-login</code><br><br>
+                        解决：编辑文件，保留需要的版本，删除标记<br>
+                        <code>&lt;div class="header"&gt;合并后的版本&lt;/div&gt;</code><br>
+                        <code>git add index.html</code><br>
+                        <code>git commit -m "解决 index.html 冲突"</code>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -671,32 +764,37 @@
         </div>
 
         <h1 class="step-section" id="step-10"><span class="step-number">10</span>第十步：SSH 密钥配置（推荐）</h1>
-        <div class="command-box">
-            <span class="comment">// 1. 生成 SSH 密钥</span>
-            <code class="cmd">ssh-keygen -t rsa -b 4096 -C "你的邮箱@example.com"</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 1. 生成 SSH 密钥</span>
+                    <code class="cmd">ssh-keygen -t rsa -b 4096 -C "你的邮箱@example.com"</code>
 
-            <span class="comment">// 2. 查看公钥内容</span>
-            <code class="cmd">cat ~/.ssh/id_rsa.pub</code>
+                    <span class="comment">// 2. 查看公钥内容</span>
+                    <code class="cmd">cat ~/.ssh/id_rsa.pub</code>
 
-            <span class="comment">// 3. 复制公钥，添加到 GitHub：Settings -> SSH and GPG keys -> New SSH key</code>
+                    <span class="comment">// 3. 复制公钥，添加到 GitHub：Settings -> SSH and GPG keys -> New SSH key</code>
 
-            <span class="comment">// 4. 测试 SSH 连接</span>
-            <code class="cmd">ssh -T git@github.com</code>
+                    <span class="comment">// 4. 测试 SSH 连接</span>
+                    <code class="cmd">ssh -T git@github.com</code>
 
-            <span class="comment">// 5. 将远程仓库地址改为 SSH 方式</span>
-            <code class="cmd">git remote set-url origin git@github.com:用户名/仓库名.git</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                完整配置流程：<br>
-                <code>ssh-keygen -t rsa -b 4096 -C "zhangsan@example.com"</code><br>
-                // 按回车使用默认路径，按回车不设置密码<br>
-                <code>cat ~/.ssh/id_rsa.pub</code><br>
-                // 复制输出的内容，粘贴到 GitHub 的 SSH keys 设置中<br>
-                <code>ssh -T git@github.com</code><br>
-                // 看到 "Hi zhangsan! You've successfully authenticated" 表示成功
+                    <span class="comment">// 5. 将远程仓库地址改为 SSH 方式</span>
+                    <code class="cmd">git remote set-url origin git@github.com:用户名/仓库名.git</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        完整配置流程：<br>
+                        <code>ssh-keygen -t rsa -b 4096 -C "zhangsan@example.com"</code><br>
+                        // 按回车使用默认路径，按回车不设置密码<br>
+                        <code>cat ~/.ssh/id_rsa.pub</code><br>
+                        // 复制输出的内容，粘贴到 GitHub 的 SSH keys 设置中<br>
+                        <code>ssh -T git@github.com</code><br>
+                        // 看到 "Hi zhangsan! You've successfully authenticated" 表示成功
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -708,51 +806,56 @@
         <div class="success">
             <strong>📋 完整步骤（推荐方式）：</strong>
         </div>
-        <div class="command-box">
-            <span class="comment">// 步骤1：在 GitHub 上创建新仓库</span>
-            <code class="cmd">访问 https://github.com/new</code>
-            <code class="cmd">填写仓库名称、描述，选择 Public/Private</code>
-            <code class="cmd">不要勾选 "Initialize this repository with a README"</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 步骤1：在 GitHub 上创建新仓库</span>
+                    <code class="cmd">访问 https://github.com/new</code>
+                    <code class="cmd">填写仓库名称、描述，选择 Public/Private</code>
+                    <code class="cmd">不要勾选 "Initialize this repository with a README"</code>
 
-            <span class="comment">// 步骤2：在本地项目目录初始化 Git</span>
-            <code class="cmd">cd 你的项目目录</code>
-            <code class="cmd">git init</code>
+                    <span class="comment">// 步骤2：在本地项目目录初始化 Git</span>
+                    <code class="cmd">cd 你的项目目录</code>
+                    <code class="cmd">git init</code>
 
-            <span class="comment">// 步骤3：创建 .gitignore 文件（如果还没有）</span>
-            <code class="cmd">echo "node_modules/" > .gitignore</code>
-            <code class="cmd">echo ".env" >> .gitignore</code>
+                    <span class="comment">// 步骤3：创建 .gitignore 文件（如果还没有）</span>
+                    <code class="cmd">echo "node_modules/" > .gitignore</code>
+                    <code class="cmd">echo ".env" >> .gitignore</code>
 
-            <span class="comment">// 步骤4：添加所有文件到暂存区</span>
-            <code class="cmd">git add .</code>
+                    <span class="comment">// 步骤4：添加所有文件到暂存区</span>
+                    <code class="cmd">git add .</code>
 
-            <span class="comment">// 步骤5：提交到本地仓库</span>
-            <code class="cmd">git commit -m "初始提交"</code>
+                    <span class="comment">// 步骤5：提交到本地仓库</span>
+                    <code class="cmd">git commit -m "初始提交"</code>
 
-            <span class="comment">// 步骤6：关联远程仓库（使用 HTTPS）</span>
-            <code class="cmd">git remote add origin https://github.com/你的用户名/仓库名.git</code>
+                    <span class="comment">// 步骤6：关联远程仓库（使用 HTTPS）</span>
+                    <code class="cmd">git remote add origin https://github.com/你的用户名/仓库名.git</code>
 
-            <span class="comment">// 或者使用 SSH（推荐）</span>
-            <code class="cmd">git remote add origin git@github.com:你的用户名/仓库名.git</code>
+                    <span class="comment">// 或者使用 SSH（推荐）</span>
+                    <code class="cmd">git remote add origin git@github.com:你的用户名/仓库名.git</code>
 
-            <span class="comment">// 步骤7：首次推送到远程仓库</span>
-            <code class="cmd">git branch -M main</code>
-            <code class="cmd">git push -u origin main</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                将本地 my-vue-app 项目上传到 GitHub：<br>
-                <code>cd my-vue-app</code><br>
-                <code>git init</code><br>
-                <code>echo "node_modules/" > .gitignore</code><br>
-                <code>echo "dist/" >> .gitignore</code><br>
-                <code>git add .</code><br>
-                <code>git commit -m "初始提交：Vue 项目"</code><br>
-                <code>git remote add origin git@github.com:zhangsan/my-vue-app.git</code><br>
-                <code>git branch -M main</code><br>
-                <code>git push -u origin main</code><br>
-                // 输入 GitHub 用户名和密码（或使用 SSH 免密）
+                    <span class="comment">// 步骤7：首次推送到远程仓库</span>
+                    <code class="cmd">git branch -M main</code>
+                    <code class="cmd">git push -u origin main</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        将本地 my-vue-app 项目上传到 GitHub：<br>
+                        <code>cd my-vue-app</code><br>
+                        <code>git init</code><br>
+                        <code>echo "node_modules/" > .gitignore</code><br>
+                        <code>echo "dist/" >> .gitignore</code><br>
+                        <code>git add .</code><br>
+                        <code>git commit -m "初始提交：Vue 项目"</code><br>
+                        <code>git remote add origin git@github.com:zhangsan/my-vue-app.git</code><br>
+                        <code>git branch -M main</code><br>
+                        <code>git push -u origin main</code><br>
+                        // 输入 GitHub 用户名和密码（或使用 SSH 免密）
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -763,69 +866,79 @@
         </div>
 
         <h1 class="step-section" id="step-12"><span class="step-number">12</span>常用快捷命令别名</h1>
-        <div class="command-box">
-            <span class="comment">// 配置常用别名（简化命令）</span>
-            <code class="cmd">git config --global alias.st status</code>
-            <code class="cmd">git config --global alias.co checkout</code>
-            <code class="cmd">git config --global alias.br branch</code>
-            <code class="cmd">git config --global alias.ci commit</code>
-            <code class="cmd">git config --global alias.unstage 'reset HEAD --'</code>
-            <code class="cmd">git config --global alias.last 'log -1 HEAD'</code>
-            <code class="cmd">git config --global alias.lg "log --graph --oneline --all"</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置常用别名（简化命令）</span>
+                    <code class="cmd">git config --global alias.st status</code>
+                    <code class="cmd">git config --global alias.co checkout</code>
+                    <code class="cmd">git config --global alias.br branch</code>
+                    <code class="cmd">git config --global alias.ci commit</code>
+                    <code class="cmd">git config --global alias.unstage 'reset HEAD --'</code>
+                    <code class="cmd">git config --global alias.last 'log -1 HEAD'</code>
+                    <code class="cmd">git config --global alias.lg "log --graph --oneline --all"</code>
 
-            <span class="comment">// 使用示例</span>
-            <code class="cmd">git st        # 等同于 git status</code>
-            <code class="cmd">git co dev    # 等同于 git checkout dev</code>
-            <code class="cmd">git ci -m ""  # 等同于 git commit -m ""</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                配置别名后，日常开发更高效：<br>
-                <code>git st</code>  // 查看状态（代替 git status）<br>
-                <code>git co -b feature</code>  // 创建分支（代替 git checkout -b）<br>
-                <code>git ci -m "完成"</code>  // 提交（代替 git commit -m）<br>
-                <code>git lg</code>  // 查看图形化日志（代替 git log --graph --oneline --all）
+                    <span class="comment">// 使用示例</span>
+                    <code class="cmd">git st        # 等同于 git status</code>
+                    <code class="cmd">git co dev    # 等同于 git checkout dev</code>
+                    <code class="cmd">git ci -m ""  # 等同于 git commit -m ""</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        配置别名后，日常开发更高效：<br>
+                        <code>git st</code>  // 查看状态（代替 git status）<br>
+                        <code>git co -b feature</code>  // 创建分支（代替 git checkout -b）<br>
+                        <code>git ci -m "完成"</code>  // 提交（代替 git commit -m）<br>
+                        <code>git lg</code>  // 查看图形化日志（代替 git log --graph --oneline --all）
+                    </div>
+                </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-13"><span class="step-number">13</span>其他实用命令</h1>
-        <div class="command-box">
-            <span class="comment">// 查看文件修改历史</span>
-            <code class="cmd">git log --follow 文件名</code>
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 查看文件修改历史</span>
+                    <code class="cmd">git log --follow 文件名</code>
 
-            <span class="comment">// 查看某次提交的详细信息</span>
-            <code class="cmd">git show 版本号</code>
+                    <span class="comment">// 查看某次提交的详细信息</span>
+                    <code class="cmd">git show 版本号</code>
 
-            <span class="comment">// 查看某个文件的某次提交内容</code>
-            <code class="cmd">git show 版本号:文件名</code>
+                    <span class="comment">// 查看某个文件的某次提交内容</code>
+                    <code class="cmd">git show 版本号:文件名</code>
 
-            <span class="comment">// 查看谁修改了某行代码</span>
-            <code class="cmd">git blame 文件名</code>
+                    <span class="comment">// 查看谁修改了某行代码</span>
+                    <code class="cmd">git blame 文件名</code>
 
-            <span class="comment">// 清理未跟踪的文件</span>
-            <code class="cmd">git clean -f</code>
+                    <span class="comment">// 清理未跟踪的文件</span>
+                    <code class="cmd">git clean -f</code>
 
-            <span class="comment">// 清理未跟踪的文件和目录</span>
-            <code class="cmd">git clean -fd</code>
+                    <span class="comment">// 清理未跟踪的文件和目录</span>
+                    <code class="cmd">git clean -fd</code>
 
-            <span class="comment">// 查看两个分支的差异</span>
-            <code class="cmd">git diff 分支1 分支2</code>
+                    <span class="comment">// 查看两个分支的差异</span>
+                    <code class="cmd">git diff 分支1 分支2</code>
 
-            <span class="comment">// 查看本地分支和远程分支的差异</span>
-            <code class="cmd">git diff HEAD origin/main</code>
-        </div>
-
-        <div class="example-box">
-            <div class="example-title">💡 实际例子</div>
-            <div class="example-content">
-                场景1：查看某行代码是谁改的<br>
-                <code>git blame index.html</code>  // 显示每行的修改者和提交信息<br><br>
-                场景2：查看某个文件的历史版本<br>
-                <code>git log --follow config.js</code>  // 查看 config.js 的完整历史<br><br>
-                场景3：对比两个分支的差异<br>
-                <code>git diff main develop</code>  // 查看 main 和 develop 的区别
+                    <span class="comment">// 查看本地分支和远程分支的差异</span>
+                    <code class="cmd">git diff HEAD origin/main</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        场景1：查看某行代码是谁改的<br>
+                        <code>git blame index.html</code>  // 显示每行的修改者和提交信息<br><br>
+                        场景2：查看某个文件的历史版本<br>
+                        <code>git log --follow config.js</code>  // 查看 config.js 的完整历史<br><br>
+                        场景3：对比两个分支的差异<br>
+                        <code>git diff main develop</code>  // 查看 main 和 develop 的区别
+                    </div>
+                </div>
             </div>
         </div>
 
