@@ -466,25 +466,85 @@
         </div>
 
         <h1 class="step-section" id="step-4"><span class="step-number">4</span>第四步：合并与衍合 (Merge & Rebase)</h1>
+        
+        <!-- 指令1：合并指定分支到当前分支 -->
         <div class="step-container">
             <div class="command-container">
                 <div class="command-box">
                     <span class="comment">// 合并指定分支到当前分支（产生合并节点）</span>
                     <code class="cmd">git merge 分支名</code>
-
-                    <span class="comment">// 合并时不要自动提交</span>
+                    
+                    <span class="comment">// 合并时不自动提交</span>
                     <code class="cmd">git merge --no-commit 分支名</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        合并 feature-login 到主分支：<br>
+                        <code>git checkout main</code>  // 切到主分支<br>
+                        <code>git pull</code>  // 拉取最新代码<br>
+                        <code>git merge feature-login</code>  // 合并登录功能
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令2：分支合并完整流程 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 1. 切换到目标分支</span>
+                    <code class="cmd">git checkout main</code>
+                    
+                    <span class="comment">// 2. 拉取最新代码</span>
+                    <code class="cmd">git pull</code>
+                    
+                    <span class="comment">// 3. 合并源分支</span>
+                    <code class="cmd">git merge 源分支名</code>
+                    
+                    <span class="comment">// 4. 处理冲突（如果有）</span>
+                    <code class="cmd">git add .</code>
+                    
+                    <span class="comment">// 5. 完成合并提交</span>
+                    <code class="cmd">git commit -m "合并说明"</code>
+                    
+                    <span class="comment">// 6. 推送结果到远程</span>
+                    <code class="cmd">git push</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        完整的合并流程：<br>
+                        <code>git checkout main</code>  // 切到主分支<br>
+                        <code>git pull</code>  // 拉取最新代码<br>
+                        <code>git merge feature-pay</code>  // 合并支付功能<br>
+                        // 解决冲突（如果有）<br>
+                        <code>git add .</code>  // 标记冲突已解决<br>
+                        <code>git commit -m "合并支付功能到主分支"</code>  // 完成合并<br>
+                        <code>git push</code>  // 推送结果
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令3：衍合指定分支到当前分支 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 衍合指定分支到当前分支（线性历史）</span>
                     <code class="cmd">git rebase 分支名</code>
-
+                    
                     <span class="comment">// 如果 rebase 遇到冲突，解决后：</span>
                     <code class="cmd">git add .</code>
                     <code class="cmd">git rebase --continue</code>
-
+                    
                     <span class="comment">// 放弃 rebase 操作</span>
                     <code class="cmd">git rebase --abort</code>
-
+                    
                     <span class="comment">// 跳过当前冲突的提交</span>
                     <code class="cmd">git rebase --skip</code>
                 </div>
@@ -493,12 +553,12 @@
                 <div class="example-box">
                     <div class="example-title">💡 实际例子</div>
                     <div class="example-content">
-                        场景：将功能分支合并到主分支<br>
-                        <code>git checkout main</code>  // 切到主分支<br>
-                        <code>git merge feature-login</code>  // 合并登录功能<br><br>
                         使用 rebase 保持历史清晰（个人开发时）：<br>
                         <code>git checkout feature-login</code><br>
-                        <code>git rebase main</code>  // 将 feature-login 变基到 main 最新
+                        <code>git rebase main</code>  // 将 feature-login 变基到 main 最新<br>
+                        // 如果有冲突，解决后：<br>
+                        <code>git add .</code><br>
+                        <code>git rebase --continue</code>
                     </div>
                 </div>
             </div>
