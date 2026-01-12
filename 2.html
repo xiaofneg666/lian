@@ -764,20 +764,70 @@
         </div>
 
         <h1 class="step-section" id="step-10"><span class="step-number">10</span>第十步：SSH 密钥配置（推荐）</h1>
+        
+        <!-- 指令1：生成 SSH 密钥 -->
         <div class="step-container">
             <div class="command-container">
                 <div class="command-box">
                     <span class="comment">// 1. 生成 SSH 密钥</span>
                     <code class="cmd">ssh-keygen -t rsa -b 4096 -C "你的邮箱@example.com"</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        生成 SSH 密钥：<br>
+                        <code>ssh-keygen -t rsa -b 4096 -C "zhangsan@example.com"</code><br>
+                        // 按回车使用默认路径，按回车不设置密码
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令2：查看公钥内容 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 2. 查看公钥内容</span>
                     <code class="cmd">cat ~/.ssh/id_rsa.pub</code>
-
-                    <span class="comment">// 3. 复制公钥，添加到 GitHub：Settings -> SSH and GPG keys -> New SSH key</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        查看生成的公钥：<br>
+                        <code>cat ~/.ssh/id_rsa.pub</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令3：测试 SSH 连接 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 4. 测试 SSH 连接</span>
                     <code class="cmd">ssh -T git@github.com</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        测试 SSH 连接：<br>
+                        <code>ssh -T git@github.com</code><br>
+                        // 看到 "Hi zhangsan! You've successfully authenticated" 表示成功
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令4：将远程仓库地址改为 SSH 方式 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 5. 将远程仓库地址改为 SSH 方式</span>
                     <code class="cmd">git remote set-url origin git@github.com:用户名/仓库名.git</code>
                 </div>
@@ -786,13 +836,8 @@
                 <div class="example-box">
                     <div class="example-title">💡 实际例子</div>
                     <div class="example-content">
-                        完整配置流程：<br>
-                        <code>ssh-keygen -t rsa -b 4096 -C "zhangsan@example.com"</code><br>
-                        // 按回车使用默认路径，按回车不设置密码<br>
-                        <code>cat ~/.ssh/id_rsa.pub</code><br>
-                        // 复制输出的内容，粘贴到 GitHub 的 SSH keys 设置中<br>
-                        <code>ssh -T git@github.com</code><br>
-                        // 看到 "Hi zhangsan! You've successfully authenticated" 表示成功
+                        修改远程仓库地址为 SSH 方式：<br>
+                        <code>git remote set-url origin git@github.com:zhangsan/my-project.git</code>
                     </div>
                 </div>
             </div>
@@ -866,63 +911,280 @@
         </div>
 
         <h1 class="step-section" id="step-12"><span class="step-number">12</span>常用快捷命令别名</h1>
+        
+        <!-- 指令1：配置 status 别名 -->
         <div class="step-container">
             <div class="command-container">
                 <div class="command-box">
-                    <span class="comment">// 配置常用别名（简化命令）</span>
+                    <span class="comment">// 配置 status 别名</span>
                     <code class="cmd">git config --global alias.st status</code>
-                    <code class="cmd">git config --global alias.co checkout</code>
-                    <code class="cmd">git config --global alias.br branch</code>
-                    <code class="cmd">git config --global alias.ci commit</code>
-                    <code class="cmd">git config --global alias.unstage 'reset HEAD --'</code>
-                    <code class="cmd">git config --global alias.last 'log -1 HEAD'</code>
-                    <code class="cmd">git config --global alias.lg "log --graph --oneline --all"</code>
-
-                    <span class="comment">// 使用示例</span>
-                    <code class="cmd">git st        # 等同于 git status</code>
-                    <code class="cmd">git co dev    # 等同于 git checkout dev</code>
-                    <code class="cmd">git ci -m ""  # 等同于 git commit -m ""</code>
                 </div>
             </div>
             <div class="example-container">
                 <div class="example-box">
                     <div class="example-title">💡 实际例子</div>
                     <div class="example-content">
-                        配置别名后，日常开发更高效：<br>
-                        <code>git st</code>  // 查看状态（代替 git status）<br>
-                        <code>git co -b feature</code>  // 创建分支（代替 git checkout -b）<br>
-                        <code>git ci -m "完成"</code>  // 提交（代替 git commit -m）<br>
-                        <code>git lg</code>  // 查看图形化日志（代替 git log --graph --oneline --all）
+                        使用 st 代替 status：<br>
+                        <code>git st</code>  // 等同于 git status
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令2：配置 checkout 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 checkout 别名</span>
+                    <code class="cmd">git config --global alias.co checkout</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 co 代替 checkout：<br>
+                        <code>git co dev</code>  // 等同于 git checkout dev<br>
+                        <code>git co -b feature</code>  // 等同于 git checkout -b feature
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令3：配置 branch 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 branch 别名</span>
+                    <code class="cmd">git config --global alias.br branch</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 br 代替 branch：<br>
+                        <code>git br</code>  // 等同于 git branch
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令4：配置 commit 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 commit 别名</span>
+                    <code class="cmd">git config --global alias.ci commit</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 ci 代替 commit：<br>
+                        <code>git ci -m "完成"</code>  // 等同于 git commit -m "完成"
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令5：配置 unstage 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 unstage 别名</span>
+                    <code class="cmd">git config --global alias.unstage 'reset HEAD --'</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 unstage 取消暂存：<br>
+                        <code>git unstage 文件名</code>  // 等同于 git reset HEAD -- 文件名
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令6：配置 last 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 last 别名</span>
+                    <code class="cmd">git config --global alias.last 'log -1 HEAD'</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 last 查看最后一次提交：<br>
+                        <code>git last</code>  // 等同于 git log -1 HEAD
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令7：配置 lg 别名 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
+                    <span class="comment">// 配置 lg 别名（图形化日志）</span>
+                    <code class="cmd">git config --global alias.lg "log --graph --oneline --all"</code>
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        使用 lg 查看图形化日志：<br>
+                        <code>git lg</code>  // 等同于 git log --graph --oneline --all
                     </div>
                 </div>
             </div>
         </div>
 
         <h1 class="step-section" id="step-13"><span class="step-number">13</span>其他实用命令</h1>
+        
+        <!-- 指令1：查看文件修改历史 -->
         <div class="step-container">
             <div class="command-container">
                 <div class="command-box">
                     <span class="comment">// 查看文件修改历史</span>
                     <code class="cmd">git log --follow 文件名</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        查看 config.js 的完整历史：<br>
+                        <code>git log --follow config.js</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令2：查看某次提交的详细信息 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 查看某次提交的详细信息</span>
                     <code class="cmd">git show 版本号</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        查看某次提交的详细内容：<br>
+                        <code>git show a1b2c3d</code>  // a1b2c3d 是提交版本号
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令3：查看某个文件的某次提交内容 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 查看某个文件的某次提交内容</code>
                     <code class="cmd">git show 版本号:文件名</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        查看 index.html 在某次提交中的内容：<br>
+                        <code>git show a1b2c3d:index.html</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令4：查看谁修改了某行代码 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 查看谁修改了某行代码</span>
                     <code class="cmd">git blame 文件名</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        查看 index.html 每行的修改者：<br>
+                        <code>git blame index.html</code>  // 显示每行的修改者和提交信息
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令5：清理未跟踪的文件 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 清理未跟踪的文件</span>
                     <code class="cmd">git clean -f</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        清理工作区中未跟踪的文件：<br>
+                        <code>git clean -f</code>  // 删除所有未跟踪的文件
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令6：清理未跟踪的文件和目录 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 清理未跟踪的文件和目录</span>
                     <code class="cmd">git clean -fd</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        清理未跟踪的文件和目录：<br>
+                        <code>git clean -fd</code>  // 删除所有未跟踪的文件和目录
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令7：查看两个分支的差异 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 查看两个分支的差异</span>
                     <code class="cmd">git diff 分支1 分支2</code>
-
+                </div>
+            </div>
+            <div class="example-container">
+                <div class="example-box">
+                    <div class="example-title">💡 实际例子</div>
+                    <div class="example-content">
+                        对比 main 和 develop 分支的差异：<br>
+                        <code>git diff main develop</code>  // 查看两个分支的区别
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 指令8：查看本地分支和远程分支的差异 -->
+        <div class="step-container">
+            <div class="command-container">
+                <div class="command-box">
                     <span class="comment">// 查看本地分支和远程分支的差异</span>
                     <code class="cmd">git diff HEAD origin/main</code>
                 </div>
@@ -931,12 +1193,8 @@
                 <div class="example-box">
                     <div class="example-title">💡 实际例子</div>
                     <div class="example-content">
-                        场景1：查看某行代码是谁改的<br>
-                        <code>git blame index.html</code>  // 显示每行的修改者和提交信息<br><br>
-                        场景2：查看某个文件的历史版本<br>
-                        <code>git log --follow config.js</code>  // 查看 config.js 的完整历史<br><br>
-                        场景3：对比两个分支的差异<br>
-                        <code>git diff main develop</code>  // 查看 main 和 develop 的区别
+                        查看本地 HEAD 和远程 main 分支的差异：<br>
+                        <code>git diff HEAD origin/main</code>
                     </div>
                 </div>
             </div>
