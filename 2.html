@@ -168,6 +168,65 @@
             color: #546e7a;
             line-height: 1.6;
         }
+        .search-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-right: 50px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
+        }
+        .search-results {
+            margin-top: 15px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+        .highlight {
+            background: linear-gradient(135deg, #ffd700 0%, #ffeb3b 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .search-match {
+            border: 3px solid #ffd700 !important;
+            animation: pulse 1s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+        }
+        .step-section {
+            scroll-margin-top: 100px;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +236,15 @@
             <p style="color: #7f8c8d; font-size: 18px;">从零开始，掌握 Git 版本控制</p>
         </div>
 
-        <h1><span class="step-number">0</span>前置准备：Git 安装与配置</h1>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索 Git 指令（如：分支、提交、推送、clone...）">
+                <span class="search-icon">🔎</span>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <h1 class="step-section" id="step-0"><span class="step-number">0</span>前置准备：Git 安装与配置</h1>
         <div class="command-box">
             <span class="comment">// 检查 Git 是否已安装</span>
             <code class="cmd">git --version</code>
@@ -209,7 +276,7 @@
             <strong>💡 提示：</strong> 配置信息会保存在 ~/.gitconfig 文件中，只需配置一次即可。
         </div>
 
-        <h1><span class="step-number">1</span>第一步：准备环境（只需做一次）</h1>
+        <h1 class="step-section" id="step-1"><span class="step-number">1</span>第一步：准备环境（只需做一次）</h1>
         <div class="command-box">
             <span class="comment">// 初始化本地项目仓库</span>
             <code class="cmd">git init</code>
@@ -232,7 +299,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">2</span>第二步：日常开发流程（循环使用）</h1>
+        <h1 class="step-section" id="step-2"><span class="step-number">2</span>第二步：日常开发流程（循环使用）</h1>
         <div class="command-box">
             <span class="comment">// 1. 查看当前分支状态（改动总览）</span>
             <code class="cmd">git status</code>
@@ -282,7 +349,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">3</span>第三步：分支管理与切换</h1>
+        <h1 class="step-section" id="step-3"><span class="step-number">3</span>第三步：分支管理与切换</h1>
         <div class="command-box">
             <span class="comment">// 查看本地分支</span>
             <code class="cmd">git branch</code>
@@ -335,7 +402,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">4</span>第四步：合并与衍合 (Merge & Rebase)</h1>
+        <h1 class="step-section" id="step-4"><span class="step-number">4</span>第四步：合并与衍合 (Merge & Rebase)</h1>
         <div class="command-box">
             <span class="comment">// 合并指定分支到当前分支（产生合并节点）</span>
             <code class="cmd">git merge 分支名</code>
@@ -373,7 +440,7 @@
             <strong>⚠️ 注意：</strong> Rebase 会重写历史，不要在公共分支上使用 rebase！
         </div>
 
-        <h1><span class="step-number">5</span>第五步：回滚、撤销与强制推送</h1>
+        <h1 class="step-section" id="step-5"><span class="step-number">5</span>第五步：回滚、撤销与强制推送</h1>
         <div class="note">
             <strong>📌 HEAD 说明：</strong> HEAD^ 表示上一个版本，HEAD^^ 表示上上个版本，HEAD~3 表示往前3个版本
         </div>
@@ -431,7 +498,7 @@
             <strong>⚠️ 警告：</strong> 强制推送会覆盖远程仓库的历史记录，团队协作时请谨慎使用！
         </div>
 
-        <h1><span class="step-number">6</span>第六步：代码贮藏 (Stash)</h1>
+        <h1 class="step-section" id="step-6"><span class="step-number">6</span>第六步：代码贮藏 (Stash)</h1>
         <div class="command-box">
             <span class="comment">// 贮藏当前修改（代码没写完又需要切分支时使用）</span>
             <code class="cmd">git stash save "备注信息"</code>
@@ -474,7 +541,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">7</span>第七步：远程库信息与标签 (Remote & Tags)</h1>
+        <h1 class="step-section" id="step-7"><span class="step-number">7</span>第七步：远程库信息与标签 (Remote & Tags)</h1>
         <div class="command-box">
             <span class="comment">// 查看远程仓库地址</span>
             <code class="cmd">git remote -v</code>
@@ -533,7 +600,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">8</span>第八步：忽略文件 (.gitignore)</h1>
+        <h1 class="step-section" id="step-8"><span class="step-number">8</span>第八步：忽略文件 (.gitignore)</h1>
         <div class="command-box">
             <span class="comment">// 创建 .gitignore 文件（在项目根目录）</span>
             <code class="cmd"># 常见忽略规则示例</code>
@@ -567,7 +634,7 @@
             <strong>💡 提示：</strong> .gitignore 文件需要在第一次 add 之前创建，否则已经跟踪的文件不会生效。
         </div>
 
-        <h1><span class="step-number">9</span>第九步：冲突解决</h1>
+        <h1 class="step-section" id="step-9"><span class="step-number">9</span>第九步：冲突解决</h1>
         <div class="command-box">
             <span class="comment">// 当出现冲突时，Git 会标记冲突文件</span>
             <code class="cmd">// 打开冲突文件，会看到类似这样的标记：</code>
@@ -603,7 +670,7 @@
             <strong>✅ 冲突解决工具：</strong> 可以使用 VS Code 的 Git 扩展、SourceTree、GitKraken 等图形化工具更方便地解决冲突。
         </div>
 
-        <h1><span class="step-number">10</span>第十步：SSH 密钥配置（推荐）</h1>
+        <h1 class="step-section" id="step-10"><span class="step-number">10</span>第十步：SSH 密钥配置（推荐）</h1>
         <div class="command-box">
             <span class="comment">// 1. 生成 SSH 密钥</span>
             <code class="cmd">ssh-keygen -t rsa -b 4096 -C "你的邮箱@example.com"</code>
@@ -637,7 +704,7 @@
             <strong>💡 优势：</strong> 使用 SSH 方式不需要每次输入密码，更安全也更方便！
         </div>
 
-        <h1><span class="step-number">11</span>完整流程：将本地项目上传到 GitHub</h1>
+        <h1 class="step-section" id="step-11"><span class="step-number">11</span>完整流程：将本地项目上传到 GitHub</h1>
         <div class="success">
             <strong>📋 完整步骤（推荐方式）：</strong>
         </div>
@@ -695,7 +762,7 @@
             <br>• -u 参数会建立本地分支与远程分支的跟踪关系，以后只需 git push
         </div>
 
-        <h1><span class="step-number">12</span>常用快捷命令别名</h1>
+        <h1 class="step-section" id="step-12"><span class="step-number">12</span>常用快捷命令别名</h1>
         <div class="command-box">
             <span class="comment">// 配置常用别名（简化命令）</span>
             <code class="cmd">git config --global alias.st status</code>
@@ -723,7 +790,7 @@
             </div>
         </div>
 
-        <h1><span class="step-number">13</span>其他实用命令</h1>
+        <h1 class="step-section" id="step-13"><span class="step-number">13</span>其他实用命令</h1>
         <div class="command-box">
             <span class="comment">// 查看文件修改历史</span>
             <code class="cmd">git log --follow 文件名</code>
@@ -767,5 +834,107 @@
             持续学习，持续进步 | Happy Coding! ✨
         </div>
     </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const stepSections = document.querySelectorAll('.step-section');
+
+        const stepKeywords = {
+            'step-0': ['安装', '配置', '用户名', '邮箱', '版本', 'init', 'config', 'version'],
+            'step-1': ['初始化', '克隆', 'clone', 'init', '环境', '准备', '仓库'],
+            'step-2': ['日常', '开发', '流程', 'status', 'add', 'commit', 'push', 'pull', '提交', '推送', '拉取', '暂存', '工作区'],
+            'step-3': ['分支', 'branch', 'checkout', 'switch', '切换', '创建', '删除', '合并', 'merge', 'rebase'],
+            'step-4': ['合并', 'merge', '衍合', 'rebase', '冲突', '解决'],
+            'step-5': ['回滚', '撤销', 'reset', 'checkout', 'restore', '强制', 'push', 'log', '历史'],
+            'step-6': ['贮藏', 'stash', '保存', '临时', '切换'],
+            'step-7': ['远程', 'remote', '标签', 'tag', '查看', '地址'],
+            'step-8': ['忽略', 'gitignore', '配置', '文件', '不提交'],
+            'step-9': ['冲突', '解决', 'merge', 'rebase', '手动'],
+            'step-10': ['ssh', '密钥', '配置', '安全', '登录', '免密'],
+            'step-11': ['上传', 'github', '完整', '流程', '发布', '部署'],
+            'step-12': ['别名', '快捷', '简化', '命令'],
+            'step-13': ['其他', '实用', 'blame', 'diff', 'log', '历史', '查看']
+        };
+
+        const stepNames = {
+            'step-0': '前置准备：Git 安装与配置',
+            'step-1': '第一步：准备环境',
+            'step-2': '第二步：日常开发流程',
+            'step-3': '第三步：分支管理与切换',
+            'step-4': '第四步：合并与衍合',
+            'step-5': '第五步：回滚、撤销与强制推送',
+            'step-6': '第六步：代码贮藏',
+            'step-7': '第七步：远程库信息与标签',
+            'step-8': '第八步：忽略文件',
+            'step-9': '第九步：冲突解决',
+            'step-10': '第十步：SSH 密钥配置',
+            'step-11': '完整流程：将本地项目上传到 GitHub',
+            'step-12': '常用快捷命令别名',
+            'step-13': '其他实用命令'
+        };
+
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query === '') {
+                searchResults.innerHTML = '';
+                stepSections.forEach(section => {
+                    section.classList.remove('search-match');
+                });
+                return;
+            }
+
+            const matches = [];
+            
+            for (const [stepId, keywords] of Object.entries(stepKeywords)) {
+                const stepName = stepNames[stepId].toLowerCase();
+                
+                if (keywords.some(keyword => keyword.toLowerCase().includes(query)) || 
+                    stepName.includes(query)) {
+                    matches.push(stepId);
+                }
+            }
+
+            if (matches.length > 0) {
+                searchResults.innerHTML = `找到 ${matches.length} 个相关步骤：<br>`;
+                matches.forEach((stepId, index) => {
+                    const stepElement = document.getElementById(stepId);
+                    stepElement.classList.add('search-match');
+                    
+                    const link = document.createElement('a');
+                    link.href = `#${stepId}`;
+                    link.style.color = '#ffd700';
+                    link.style.margin = '0 8px';
+                    link.style.textDecoration = 'none';
+                    link.style.fontWeight = 'bold';
+                    link.textContent = `步骤 ${stepId.replace('step-', '')}`;
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        stepElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                    
+                    searchResults.appendChild(link);
+                });
+            } else {
+                searchResults.innerHTML = '未找到相关指令，请尝试其他关键词';
+            }
+        });
+
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = e.target.value.toLowerCase().trim();
+                if (query !== '') {
+                    for (const [stepId, keywords] of Object.entries(stepKeywords)) {
+                        if (keywords.some(keyword => keyword.toLowerCase().includes(query))) {
+                            const stepElement = document.getElementById(stepId);
+                            stepElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
